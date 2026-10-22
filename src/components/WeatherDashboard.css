@@ -1,0 +1,377 @@
+
+
+.weather-dashboard {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 14px 18px 24px;
+  box-sizing: border-box;
+  color: #29435c;
+  font-family: "Noto Sans Georgian", sans-serif;
+}
+
+/* ========================================
+   CITY, DATE AND CLOCK
+======================================== */
+
+.dashboard-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.dashboard-heading h1 {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #29435c;
+}
+
+.dashboard-heading p {
+  margin: 0;
+  color: #8ca0b2;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.dashboard-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.dashboard-clock time {
+  color: #29435c;
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.dashboard-clock span {
+  color: #8ca0b2;
+  font-size: 10px;
+}
+
+/* ========================================
+   CURRENT WEATHER + FORECAST LAYOUT
+======================================== */
+
+.weather-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(250px, 0.85fr);
+  gap: 12px;
+  align-items: stretch;
+  margin-bottom: 16px;
+}
+
+.weather-main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.weather-side-column {
+  display: flex;
+  min-width: 0;
+}
+
+.weather-side-column > * {
+  width: 100%;
+  min-width: 0;
+}
+
+/* ========================================
+   METRICS SECTION
+======================================== */
+
+.weather-metrics-section {
+  width: 100%;
+  margin-top: 2px;
+}
+
+.metrics-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.metrics-heading h2 {
+  margin: 0;
+  color: #29435c;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.metrics-heading > span {
+  color: #9aabba;
+  font-size: 10px;
+}
+
+.weather-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+/* ========================================
+   METRIC CARDS
+======================================== */
+
+.weather-metric-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 112px;
+  padding: 13px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #edf2f7;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(49, 83, 112, 0.025);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.weather-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 16px rgba(49, 83, 112, 0.07);
+}
+
+.metric-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  margin-bottom: 10px;
+}
+
+.metric-title svg {
+  flex-shrink: 0;
+}
+
+.metric-title h3 {
+  min-width: 0;
+  margin: 0;
+  color: #8195a8;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.metric-values {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+  margin-bottom: 5px;
+}
+
+.metric-primary,
+.metric-secondary {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  min-width: 0;
+}
+
+.metric-primary strong,
+.metric-secondary strong {
+  color: #29435c;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-primary span,
+.metric-secondary span {
+  color: #91a4b5;
+  font-size: 10px;
+}
+
+.metric-secondary {
+  padding-left: 10px;
+  border-left: 1px solid #edf2f7;
+}
+
+.metric-secondary strong {
+  font-size: 18px;
+}
+
+.weather-metric-card > p {
+  margin: 3px 0 0;
+  color: #98aaba;
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+/* ========================================
+   AIR QUALITY INDICATOR
+======================================== */
+
+.air-quality-bar {
+  display: flex;
+  width: 100%;
+  height: 4px;
+  margin-top: 9px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: linear-gradient(
+    to right,
+    #6dbb9b 0%,
+    #a5cf8b 25%,
+    #f0d27d 50%,
+    #eea78d 75%,
+    #c99ac8 100%
+  );
+}
+
+.air-quality-bar span {
+  width: 18%;
+  height: 100%;
+  border-right: 2px solid #ffffff;
+  box-sizing: border-box;
+}
+
+/* ========================================
+   HUMIDITY PROGRESS BAR
+======================================== */
+
+.humidity-bar {
+  width: 100%;
+  height: 4px;
+  margin-top: 9px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #eaf2f8;
+}
+
+.humidity-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #69a9dc;
+}
+
+/* ========================================
+   RESPONSIVE: TABLETS
+======================================== */
+
+@media (max-width: 900px) {
+  .weather-dashboard {
+    padding: 12px;
+  }
+
+  .weather-overview {
+    grid-template-columns: minmax(0, 1.4fr) minmax(220px, 1fr);
+    gap: 10px;
+  }
+
+  .weather-metrics-grid {
+    gap: 8px;
+  }
+
+  .weather-metric-card {
+    padding: 10px;
+  }
+
+  .metric-primary strong {
+    font-size: 20px;
+  }
+}
+
+/* ========================================
+   RESPONSIVE: MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+  .weather-dashboard {
+    padding: 12px 10px 20px;
+  }
+
+  .dashboard-heading {
+    margin-bottom: 12px;
+  }
+
+  .dashboard-heading h1 {
+    font-size: 15px;
+  }
+
+  .dashboard-clock time {
+    font-size: 13px;
+  }
+
+  .weather-overview {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .weather-main-column {
+    gap: 12px;
+  }
+
+  .weather-side-column {
+    min-width: 0;
+  }
+
+  .weather-metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .weather-metric-card {
+    min-height: 110px;
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .metric-title {
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+
+  .metric-title h3 {
+    font-size: 9px;
+  }
+
+  .metric-primary strong {
+    font-size: 20px;
+  }
+
+  .metric-secondary {
+    padding-left: 7px;
+  }
+
+  .metric-secondary strong {
+    font-size: 16px;
+  }
+
+  .metrics-heading h2 {
+    font-size: 12px;
+  }
+}
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 360px) {
+  .weather-metrics-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .weather-metric-card {
+    min-height: 100px;
+  }
+}

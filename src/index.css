@@ -1,0 +1,33 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #f5f9fc;
+  color: #29435c;
+  font-family: "Noto Sans Georgian", sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.weather-content {
+  width: 100%;
+  min-height: calc(100vh - 44px);
+}

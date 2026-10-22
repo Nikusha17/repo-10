@@ -1,0 +1,210 @@
+
+.forecast-card {
+  width: 100%;
+  min-width: 0;
+  padding: 15px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #edf2f7;
+  border-radius: 15px;
+  color: #29435c;
+}
+
+.forecast-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.forecast-heading h2 {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.forecast-heading p {
+  margin: 0;
+  color: #91a4b5;
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+.forecast-icon {
+  flex-shrink: 0;
+  color: #398bd5;
+}
+
+.forecast-icon-sun {
+  color: #efb64f;
+}
+
+.forecast-icon-cloudSun {
+  color: #76a7d1;
+}
+
+.forecast-icon-cloudRain {
+  color: #679dd0;
+}
+
+.forecast-icon-moon {
+  color: #829bc6;
+}
+
+/* Hourly forecast */
+
+.hourly-list {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.hourly-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  min-width: 0;
+  padding: 12px 3px;
+  background: #f5f9fc;
+  border-radius: 10px;
+}
+
+.hourly-time {
+  color: #8096a9;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.hourly-temp {
+  color: #29435c;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Weekly forecast */
+
+.weekly-forecast {
+  height: 100%;
+}
+
+.weekly-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.weekly-row {
+  display: grid;
+  grid-template-columns: minmax(64px, 1fr) 25px minmax(90px, 1.5fr);
+  align-items: center;
+  gap: 8px;
+  min-height: 39px;
+  border-bottom: 1px solid #f0f4f7;
+}
+
+.weekly-row:last-child {
+  border-bottom: none;
+}
+
+.weekly-day {
+  color: #607b92;
+  font-size: 10px;
+}
+
+.weekly-temperatures {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.weekly-min,
+.weekly-max {
+  color: #29435c;
+  font-size: 10px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.weekly-min {
+  color: #9aabba;
+}
+
+.weekly-temperature-bar {
+  width: 36px;
+  height: 4px;
+  overflow: hidden;
+  background: #e8f1f8;
+  border-radius: 10px;
+}
+
+.weekly-temperature-bar span {
+  display: block;
+  width: 75%;
+  height: 100%;
+  background: linear-gradient(90deg, #91c9eb, #efc46e);
+  border-radius: inherit;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .forecast-card {
+    padding: 12px;
+  }
+
+  .hourly-list {
+    gap: 4px;
+  }
+
+  .hourly-item {
+    gap: 8px;
+    padding: 10px 2px;
+  }
+
+  .weekly-row {
+    grid-template-columns: minmax(60px, 1fr) 22px minmax(80px, 1.4fr);
+    gap: 5px;
+  }
+
+  .weekly-temperature-bar {
+    width: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hourly-list {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .hourly-item {
+    padding: 10px 1px;
+  }
+
+  .hourly-time {
+    font-size: 8px;
+  }
+
+  .hourly-temp {
+    font-size: 11px;
+  }
+
+  .weekly-row {
+    grid-template-columns: minmax(75px, 1fr) 28px minmax(100px, 1.5fr);
+    min-height: 42px;
+  }
+
+  .weekly-day {
+    font-size: 11px;
+  }
+
+  .weekly-temperatures {
+    gap: 8px;
+  }
+
+  .weekly-temperature-bar {
+    width: 40px;
+  }
+}
