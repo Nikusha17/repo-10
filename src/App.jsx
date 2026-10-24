@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 import Header from "./components/Header";
@@ -13,15 +12,9 @@ function App() {
 
   return (
     <>
-      <Header
-        onSearch={setCity}
-        onUnitChange={setUnit}
-      />
+      <Header onSearch={setCity} onUnitChange={setUnit} unit={unit} />
 
-      <WeatherDashboard
-        city={city}
-        unit={unit}
-      />
+      <WeatherDashboard city={city} unit={unit} />
 
       <Footer />
     </>

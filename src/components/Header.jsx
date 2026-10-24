@@ -1,78 +1,52 @@
-
 import { useState } from "react";
-import {
-  Sun,
-  Search,
-  MapPin,
-  Settings2,
-  UserRound,
-} from "lucide-react";
+import { Sun, Search, MapPin, Settings2, UserRound } from "lucide-react";
 import "./Header.css";
 
-export default function Header({
-  onSearch,
-  onUnitChange,
-}) {
+export default function Header({ onSearch, onUnitChange, unit = "C" }) {
   const [city, setCity] = useState("");
-  const [unit, setUnit] = useState("C");
 
   function handleSearch(event) {
     event.preventDefault();
 
     const value = city.trim();
 
-    if (value && onSearch) {
+    if (value && typeof onSearch === "function") {
       onSearch(value);
+      setCity("");
     }
-  }
-
-  function handleUnitChange(value) {
-    setUnit(value);
-    onUnitChange?.(value);
   }
 
   return (
     <header className="app-header">
       <a className="header-brand" href="/" aria-label="მთავარი">
         <span className="brand-icon">
-          <Sun size={19} strokeWidth={2} />
+          <Sun size={20} strokeWidth={2} />
         </span>
-
         <span className="brand-name">ამინდი</span>
       </a>
 
-      <form
-        className="header-search"
-        onSubmit={handleSearch}
-      >
-        <Search size={16} className="search-icon" />
+      <form className="header-search" onSubmit={handleSearch}>
+        <Search size={17} className="search-icon" />
 
         <input
           type="search"
-          placeholder="მოძებნე ქალაქი ან რეგიონი"
+          placeholder="მოძებნე საქართველოს ქალაქი"
           value={city}
           onChange={(event) => setCity(event.target.value)}
           aria-label="ქალაქის ძიება"
         />
 
-        <button
-          type="submit"
-          className="search-location"
-          aria-label="მოძებნა"
-        >
-          <MapPin size={15} />
+        <button type="submit" className="search-location" aria-label="მოძებნა">
+          <MapPin size={16} />
         </button>
       </form>
 
       <div className="header-actions">
-        <div
-          className="unit-switch"
-          aria-label="ტემპერატურის ერთეული"
-        >
+        <div className="unit-switch" aria-label="ტემპერატურის ერთეული">
           <button
             type="button"
             className={unit === "C" ? "active" : ""}
-            onClick={() => handleUnitChange("C")}
+            onClick={() => onUnitChange?.("C")}
             aria-pressed={unit === "C"}
           >
             °C
@@ -81,7 +55,7 @@ export default function Header({
           <button
             type="button"
             className={unit === "F" ? "active" : ""}
-            onClick={() => handleUnitChange("F")}
+            onClick={() => onUnitChange?.("F")}
             aria-pressed={unit === "F"}
           >
             °F
@@ -92,16 +66,18 @@ export default function Header({
           type="button"
           className="header-icon-button"
           aria-label="პარამეტრები"
+          onClick={() => window.alert("პარამეტრები")}
         >
-          <Settings2 size={17} />
+          <Settings2 size={18} />
         </button>
 
         <button
           type="button"
           className="header-icon-button"
           aria-label="მომხმარებლის პროფილი"
+          onClick={() => window.alert("მომხმარებლის პროფილი")}
         >
-          <UserRound size={17} />
+          <UserRound size={18} />
         </button>
       </div>
     </header>

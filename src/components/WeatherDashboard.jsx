@@ -2,17 +2,67 @@ import { useEffect, useState } from "react";
 import { getWeather } from "../api/weather";
 import "./WeatherDashboard.css";
 
-// ამინდის მიხედვით ფერების თემის არჩევა
+const CITIES = [
+  { name: "თბილისი", value: "Tbilisi" },
+  { name: "ბათუმი", value: "Batumi" },
+  { name: "ქუთაისი", value: "Kutaisi" },
+  { name: "რუსთავი", value: "Rustavi" },
+  { name: "გორი", value: "Gori" },
+  { name: "ზუგდიდი", value: "Zugdidi" },
+  { name: "ფოთი", value: "Poti" },
+  { name: "თელავი", value: "Telavi" },
+  { name: "ახალციხე", value: "Akhaltsikhe" },
+  { name: "ოზურგეთი", value: "Ozurgeti" },
+  { name: "სამტრედია", value: "Samtredia" },
+  { name: "სენაკი", value: "Senaki" },
+  { name: "ზესტაფონი", value: "Zestafoni" },
+  { name: "ხაშური", value: "Khashuri" },
+  { name: "ბორჯომი", value: "Borjomi" },
+  { name: "მარნეული", value: "Marneuli" },
+  { name: "ქობულეთი", value: "Kobuleti" },
+  { name: "ამბროლაური", value: "Ambrolauri" },
+  { name: "ონი", value: "Oni" },
+  { name: "ლაგოდეხი", value: "Lagodekhi" },
+  { name: "გურჯაანი", value: "Gurjaani" },
+  { name: "ყვარელი", value: "Kvareli" },
+  { name: "საგარეჯო", value: "Sagarejo" },
+  { name: "კასპი", value: "Kaspi" },
+  { name: "ჭიათურა", value: "Chiatura" },
+  { name: "ტყიბული", value: "Tkibuli" },
+  { name: "ხონი", value: "Khoni" },
+  { name: "წყალტუბო", value: "Tskaltubo" },
+  { name: "მესტია", value: "Mestia" },
+  { name: "გუდაური", value: "Gudauri" },
+  { name: "ხარაგაული", value: "Kharagauli" },
+];
+
+function normalizeCity(value) {
+  const input = value.trim().toLocaleLowerCase("ka");
+
+  const match = CITIES.find(
+    (item) =>
+      item.name.toLocaleLowerCase("ka") === input ||
+      item.value.toLocaleLowerCase("en") === input,
+  );
+
+  return match ? match.value : value.trim();
+}
+
+function getTemperature(celsius, unit) {
+  if (unit === "F") {
+    return Math.round((celsius * 9) / 5 + 32);
+  }
+
+  return Math.round(celsius);
+}
+
 function getWeatherTheme(current) {
   const code = current.condition.code;
-  const isDay = current.is_day === 1;
 
-  // ჭექა-ქუხილი
   if ([1087, 1273, 1276, 1279, 1282].includes(code)) {
     return "stormy";
   }
 
-  // თოვლი და ყინული
   if (
     [
       1066, 1069, 1072, 1114, 1117, 1147, 1168, 1171, 1204, 1207, 1210, 1213,
@@ -22,7 +72,6 @@ function getWeatherTheme(current) {
     return "snowy";
   }
 
-  // წვიმა და ნალექი
   if (
     [
       1063, 1150, 1153, 1180, 1183, 1186, 1189, 1192, 1195, 1198, 1201, 1240,
@@ -32,33 +81,40 @@ function getWeatherTheme(current) {
     return "rainy";
   }
 
-  // ნისლი
   if ([1030, 1135, 1147].includes(code)) {
     return "foggy";
   }
 
-  // ღამე
-  if (!isDay) {
+  if (current.is_day !== 1) {
     return "night";
   }
 
-  // მოღრუბლული
-  if ([1006, 1009].includes(code)) {
+  if ([1006, 1009, 1003].includes(code)) {
     return "cloudy";
   }
 
-  // მზიანი ან ნაწილობრივ მოღრუბლული
   return "sunny";
 }
 
-export default function WeatherDashboard() {
+export default function WeatherDashboard({
+  city: selectedCity = "Tbilisi",
+  unit: selectedUnit = "C",
+}) {
+  const [city, setCity] = useState(selectedCity);
+  const [unit, setUnit] = useState(selectedUnit);
   const [weather, setWeather] = useState(null);
-  const [city, setCity] = useState("Tbilisi");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [retry, setRetry] = useState(0);
 
-  // ამინდის მონაცემების წამოღება
+  useEffect(() => {
+    setCity(selectedCity);
+  }, [selectedCity]);
+
+  useEffect(() => {
+    setUnit(selectedUnit);
+  }, [selectedUnit]);
+
   useEffect(() => {
     let cancelled = false;
 
@@ -94,19 +150,35 @@ export default function WeatherDashboard() {
     };
   }, [city, retry]);
 
-  // თემის განსაზღვრა მიღებული ამინდის მიხედვით
   const theme = weather ? getWeatherTheme(weather.current) : "sunny";
 
-  // თემის მიბმა მთელ საიტზე
   useEffect(() => {
     document.documentElement.dataset.weatherTheme = theme;
-
-    return () => {
-      delete document.documentElement.dataset.weatherTheme;
-    };
   }, [theme]);
 
-  // საწყისი ჩატვირთვის ლოუდერი
+  function handleSearch(searchCity) {
+    const normalizedCity = normalizeCity(searchCity);
+
+    const foundCity = CITIES.find(
+      (item) => item.value.toLowerCase() === normalizedCity.toLowerCase(),
+    );
+
+    if (!foundCity) {
+      setError(
+        "ეს ქალაქი სიაში არ არის. აირჩიე საქართველოს მხარდაჭერილი ქალაქი.",
+      );
+      return;
+    }
+
+    setError("");
+    setCity(foundCity.value);
+  }
+
+  const temp = (value) => getTemperature(value, unit);
+  const unitLabel = unit === "C" ? "°C" : "°F";
+
+  const cityName = CITIES.find((item) => item.value === city)?.name ?? city;
+
   if (loading && !weather) {
     return (
       <div className="weather-loading-screen">
@@ -120,14 +192,12 @@ export default function WeatherDashboard() {
     );
   }
 
-  // შეცდომის შეტყობინება და ხელახლა ცდა
   if (error && !weather) {
     return (
       <div className="weather-loading-screen">
         <div className="weather-loader">
           <h2>მონაცემების მიღება ვერ მოხერხდა</h2>
           <p role="alert">{error}</p>
-
           <button type="button" onClick={() => setRetry((value) => value + 1)}>
             ხელახლა ცდა
           </button>
@@ -140,44 +210,31 @@ export default function WeatherDashboard() {
 
   const { location, current, forecast } = weather;
 
-  // ქალაქის ქართული სახელწოდება
-  const cityNames = {
-    Tbilisi: "თბილისი",
-    Batumi: "ბათუმი",
-    Kutaisi: "ქუთაისი",
-    Kharagauli: "ხარაგაული",
-  };
-
-  // საათობრივი პროგნოზი
-  const currentHour = Number(location.localtime.slice(11, 13));
-
-  const hourlyForecast = (
+  const today =
     forecast.forecastday.find(
       (day) => day.date === location.localtime.slice(0, 10),
-    ) ?? forecast.forecastday[0]
-  ).hour
-    .filter((hour) => {
-      const hourTime = Number(hour.time.slice(11, 13));
-      return hourTime >= currentHour;
-    })
+    ) ?? forecast.forecastday[0];
+
+  const currentHour = Number(location.localtime.slice(11, 13));
+
+  const hourlyForecast = today.hour
+    .filter((hour) => Number(hour.time.slice(11, 13)) >= currentHour)
     .filter((_, index) => index % 3 === 0)
     .slice(0, 6);
 
   return (
     <main className="weather-dashboard">
-      {/* ქალაქის შეცვლისას ლოუდერი */}
       {loading && (
         <div className="weather-refresh-overlay">
           <div className="weather-refresh-card">
             <div className="weather-loader-icon">🌤️</div>
             <div className="weather-spinner" />
             <h2>ამინდი ახლდება...</h2>
-            <p>{cityNames[city] ?? city} — ახალი მონაცემების მიღება</p>
+            <p>{cityName} — ახალი მონაცემების მიღება</p>
           </div>
         </div>
       )}
 
-      {/* სათაური და ქალაქის არჩევა */}
       <div className="dashboard-heading">
         <div>
           <h1>
@@ -186,32 +243,47 @@ export default function WeatherDashboard() {
           <p>{location.localtime}</p>
         </div>
 
-        <select
-          value={city}
-          onChange={(event) => setCity(event.target.value)}
-          aria-label="აირჩიე ქალაქი"
-          disabled={loading}
-        >
-          <option value="Tbilisi">თბილისი</option>
-          <option value="Batumi">ბათუმი</option>
-          <option value="Kutaisi">ქუთაისი</option>
-          <option value="Kharagauli">ხარაგაული</option>
-        </select>
+        <div className="city-selector">
+          <label htmlFor="city-select">აირჩიე ქალაქი</label>
+
+          <select
+            id="city-select"
+            value={city}
+            onChange={(event) => {
+              setError("");
+              setCity(event.target.value);
+            }}
+            disabled={loading}
+          >
+            {CITIES.map((item) => (
+              <option key={item.value} value={item.value}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      {/* მიმდინარე ამინდი */}
+      {error && (
+        <div className="weather-error-message" role="alert">
+          <p>{error}</p>
+          <button type="button" onClick={() => setRetry((value) => value + 1)}>
+            ხელახლა ცდა
+          </button>
+        </div>
+      )}
+
       <section className="current-weather">
         <div className="current-weather-content">
           <div className="current-weather-location">{location.name}</div>
 
-          <div className="current-temperature">
-            {Math.round(current.temp_c)}°
-          </div>
+          <div className="current-temperature">{temp(current.temp_c)}°</div>
 
           <h2>{current.condition.text}</h2>
 
           <p className="weather-feels-like">
-            შეგრძნებით {Math.round(current.feelslike_c)}°C
+            შეგრძნებით {temp(current.feelslike_c)}
+            {unitLabel}
             <span className="weather-dot">•</span>
             ტენიანობა {current.humidity}%
           </p>
@@ -231,7 +303,6 @@ export default function WeatherDashboard() {
         </div>
       </section>
 
-      {/* საათობრივი პროგნოზი */}
       <section className="forecast-card">
         <div className="forecast-heading">
           <div>
@@ -252,13 +323,12 @@ export default function WeatherDashboard() {
                 height="36"
               />
 
-              <span className="hourly-temp">{Math.round(hour.temp_c)}°</span>
+              <span className="hourly-temp">{temp(hour.temp_c)}°</span>
             </div>
           ))}
         </div>
       </section>
 
-      {/* დღიური პროგნოზი */}
       <section className="forecast-card weekly-forecast">
         <div className="forecast-heading">
           <div>
@@ -280,13 +350,9 @@ export default function WeatherDashboard() {
               />
 
               <div className="weekly-temperatures">
-                <span className="weekly-min">
-                  {Math.round(day.day.mintemp_c)}°
-                </span>
+                <span className="weekly-min">{temp(day.day.mintemp_c)}°</span>
 
-                <span className="weekly-max">
-                  {Math.round(day.day.maxtemp_c)}°
-                </span>
+                <span className="weekly-max">{temp(day.day.maxtemp_c)}°</span>
               </div>
             </div>
           ))}
