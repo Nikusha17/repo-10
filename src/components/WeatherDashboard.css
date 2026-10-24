@@ -1,12 +1,11 @@
-
-
 .weather-dashboard {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
   padding: 14px 18px 24px;
   box-sizing: border-box;
-  color: #29435c;
+
+  color: #0f2f50;
   font-family: "Noto Sans Georgian", sans-serif;
 }
 
@@ -25,14 +24,14 @@
 .dashboard-heading h1 {
   margin: 0 0 4px;
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.5;
-  color: #29435c;
+  color: #0f2f50;
 }
 
 .dashboard-heading p {
   margin: 0;
-  color: #8ca0b2;
+  color: #7b93aa;
   font-size: 11px;
   line-height: 1.6;
 }
@@ -46,14 +45,14 @@
 }
 
 .dashboard-clock time {
-  color: #29435c;
+  color: #1d4ed8;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
 
 .dashboard-clock span {
-  color: #8ca0b2;
+  color: #7b93aa;
   font-size: 10px;
 }
 
@@ -105,13 +104,13 @@
 
 .metrics-heading h2 {
   margin: 0;
-  color: #29435c;
+  color: #0f2f50;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .metrics-heading > span {
-  color: #9aabba;
+  color: #7b93aa;
   font-size: 10px;
 }
 
@@ -133,18 +132,24 @@
   padding: 13px;
   box-sizing: border-box;
   overflow: hidden;
-  background: #ffffff;
-  border: 1px solid #edf2f7;
+
+  background: linear-gradient(145deg, #ffffff 0%, #f0f9ff 65%, #f5f3ff 100%);
+
+  border: 1px solid #dbeafe;
   border-radius: 15px;
-  box-shadow: 0 2px 8px rgba(49, 83, 112, 0.025);
+
+  box-shadow: 0 3px 12px rgb(37 99 235 / 4%);
+
   transition:
     transform 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .weather-metric-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 16px rgba(49, 83, 112, 0.07);
+  border-color: #bae6fd;
+  box-shadow: 0 7px 18px rgb(37 99 235 / 9%);
 }
 
 .metric-title {
@@ -157,14 +162,16 @@
 
 .metric-title svg {
   flex-shrink: 0;
+  color: #0284c7;
 }
 
 .metric-title h3 {
   min-width: 0;
   margin: 0;
-  color: #8195a8;
+
+  color: #647f98;
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.6;
 }
 
@@ -187,31 +194,32 @@
 
 .metric-primary strong,
 .metric-secondary strong {
-  color: #29435c;
+  color: #0f2f50;
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.2;
   font-variant-numeric: tabular-nums;
 }
 
 .metric-primary span,
 .metric-secondary span {
-  color: #91a4b5;
+  color: #7b93aa;
   font-size: 10px;
 }
 
 .metric-secondary {
   padding-left: 10px;
-  border-left: 1px solid #edf2f7;
+  border-left: 1px solid #dbeafe;
 }
 
 .metric-secondary strong {
+  color: #2563eb;
   font-size: 18px;
 }
 
 .weather-metric-card > p {
   margin: 3px 0 0;
-  color: #98aaba;
+  color: #7b93aa;
   font-size: 9px;
   line-height: 1.6;
 }
@@ -223,17 +231,18 @@
 .air-quality-bar {
   display: flex;
   width: 100%;
-  height: 4px;
+  height: 5px;
   margin-top: 9px;
   overflow: hidden;
   border-radius: 10px;
+
   background: linear-gradient(
     to right,
-    #6dbb9b 0%,
-    #a5cf8b 25%,
-    #f0d27d 50%,
-    #eea78d 75%,
-    #c99ac8 100%
+    #34d399 0%,
+    #a3d977 25%,
+    #fbbf24 50%,
+    #fb923c 75%,
+    #c084fc 100%
   );
 }
 
@@ -250,18 +259,19 @@
 
 .humidity-bar {
   width: 100%;
-  height: 4px;
+  height: 5px;
   margin-top: 9px;
   overflow: hidden;
   border-radius: 10px;
-  background: #eaf2f8;
+  background: #dbeafe;
 }
 
 .humidity-bar span {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: #69a9dc;
+
+  background: linear-gradient(90deg, #38bdf8 0%, #3b82f6 65%, #818cf8 100%);
 }
 
 /* ========================================

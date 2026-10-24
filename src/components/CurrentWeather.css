@@ -1,4 +1,3 @@
-
 .current-weather {
   position: relative;
   display: flex;
@@ -10,15 +9,21 @@
   padding: 20px 16px;
   overflow: hidden;
   box-sizing: border-box;
-  border: 1px solid #e1effa;
+
+  border: 1px solid #7dd3fc;
   border-radius: 15px;
+
   background: linear-gradient(
     115deg,
-    #d9efff 0%,
-    #c5e2f6 55%,
-    #eaf5fc 100%
+    #e0f2fe 0%,
+    #bae6fd 45%,
+    #eff6ff 75%,
+    #f5f3ff 100%
   );
-  color: #29435c;
+
+  color: #0f2f50;
+
+  box-shadow: 0 5px 20px rgb(37 99 235 / 7%);
 }
 
 .current-weather-content {
@@ -33,7 +38,8 @@
   align-items: center;
   gap: 5px;
   margin-bottom: 8px;
-  color: #547b9b;
+
+  color: #0369a1;
   font-size: 10px;
 }
 
@@ -42,22 +48,27 @@
   align-items: flex-start;
   gap: 3px;
   margin-bottom: 6px;
-  color: #29435c;
+
+  color: #0f2f50;
   font-size: clamp(38px, 4vw, 52px);
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: -2px;
+
+  font-variant-numeric: tabular-nums;
 }
 
 .current-temperature span {
   padding-top: 5px;
   font-size: 18px;
+  font-weight: 500;
   letter-spacing: 0;
 }
 
 .current-weather-content h2 {
   margin: 0 0 6px;
-  color: #36556e;
+
+  color: #164e75;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.6;
@@ -69,19 +80,21 @@
   align-items: center;
   gap: 5px;
   margin: 0 0 7px;
-  color: #63839d;
+
+  color: #426b89;
   font-size: 9px;
   line-height: 1.6;
 }
 
 .weather-dot {
-  color: #91b0c8;
+  color: #7ba9c7;
 }
 
 .current-weather-description {
   max-width: 290px;
   margin: 0;
-  color: #69869d;
+
+  color: #426b89;
   font-size: 9px;
   line-height: 1.7;
 }
@@ -108,21 +121,24 @@
   width: 65px;
   height: 65px;
   border-radius: 50%;
-  color: #f3bd58;
+
+  color: #f59e0b;
+
   background: radial-gradient(
     circle,
-    #fff5ce 0%,
-    #ffe6a8 45%,
-    #f7cc78 75%,
-    transparent 100%
+    #fff7d6 0%,
+    #fde68a 42%,
+    #fbbf24 68%,
+    rgb(251 191 36 / 0%) 100%
   );
-  filter: drop-shadow(0 4px 10px #eabf7550);
+
+  filter: drop-shadow(0 4px 12px rgb(245 158 11 / 22%));
 }
 
 .weather-sun svg {
   width: 100%;
   height: 100%;
-  opacity: 0.45;
+  opacity: 0.65;
 }
 
 .weather-cloud {
@@ -130,18 +146,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   color: #ffffff;
-  filter: drop-shadow(0 5px 7px #7098b533);
+  filter: drop-shadow(0 5px 8px rgb(59 130 180 / 18%));
 }
 
 .weather-cloud svg {
-  fill: #f7fbff;
+  fill: #f8fcff;
 }
 
 .weather-cloud-back {
   top: 39px;
   right: 1%;
-  color: #d9e8f4;
+  color: #bfdbfe;
+}
+
+.weather-cloud-back svg {
+  fill: #dbeafe;
 }
 
 .weather-cloud-front {
@@ -159,12 +180,16 @@
   top: 12px;
   right: 8px;
   padding: 5px 8px;
-  border: 1px solid #ffffff70;
+
+  border: 1px solid rgb(255 255 255 / 80%);
   border-radius: 20px;
-  background: #ffffff70;
-  color: #69869d;
+
+  background: rgb(255 255 255 / 75%);
+  color: #0369a1;
+
   font-size: 8px;
   white-space: nowrap;
+  backdrop-filter: blur(8px);
 }
 
 /* Tablet */
@@ -194,6 +219,7 @@
   .current-weather {
     min-height: 150px;
     padding: 16px 12px;
+    border-radius: 13px;
   }
 
   .current-weather-content {

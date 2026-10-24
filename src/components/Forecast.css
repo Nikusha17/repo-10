@@ -1,13 +1,16 @@
-
 .forecast-card {
   width: 100%;
   min-width: 0;
   padding: 15px;
   box-sizing: border-box;
-  background: #ffffff;
-  border: 1px solid #edf2f7;
+
+  background: linear-gradient(145deg, #ffffff 0%, #f0f9ff 55%, #f5f3ff 100%);
+
+  border: 1px solid #dbeafe;
   border-radius: 15px;
-  color: #29435c;
+  color: #0f2f50;
+
+  box-shadow: 0 4px 16px rgb(37 99 235 / 5%);
 }
 
 .forecast-heading {
@@ -21,34 +24,35 @@
   margin: 0 0 4px;
   font-size: 12px;
   font-weight: 600;
+  color: #0f2f50;
 }
 
 .forecast-heading p {
   margin: 0;
-  color: #91a4b5;
+  color: #7b93aa;
   font-size: 9px;
   line-height: 1.6;
 }
 
 .forecast-icon {
   flex-shrink: 0;
-  color: #398bd5;
+  color: #38bdf8;
 }
 
 .forecast-icon-sun {
-  color: #efb64f;
+  color: #f59e0b;
 }
 
 .forecast-icon-cloudSun {
-  color: #76a7d1;
+  color: #60a5fa;
 }
 
 .forecast-icon-cloudRain {
-  color: #679dd0;
+  color: #0284c7;
 }
 
 .forecast-icon-moon {
-  color: #829bc6;
+  color: #818cf8;
 }
 
 /* Hourly forecast */
@@ -67,20 +71,36 @@
   gap: 11px;
   min-width: 0;
   padding: 12px 3px;
-  background: #f5f9fc;
+
+  background: linear-gradient(180deg, #f0f9ff 0%, #eaf4ff 100%);
+
+  border: 1px solid #e0f2fe;
   border-radius: 10px;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.hourly-item:hover {
+  transform: translateY(-2px);
+
+  background: linear-gradient(180deg, #e0f2fe 0%, #dbeafe 100%);
+
+  box-shadow: 0 4px 12px rgb(37 99 235 / 8%);
 }
 
 .hourly-time {
-  color: #8096a9;
+  color: #7b93aa;
   font-size: 9px;
   white-space: nowrap;
 }
 
 .hourly-temp {
-  color: #29435c;
+  color: #1e40af;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* Weekly forecast */
@@ -101,15 +121,23 @@
   align-items: center;
   gap: 8px;
   min-height: 39px;
-  border-bottom: 1px solid #f0f4f7;
+
+  border-bottom: 1px solid #e8f1fa;
+
+  transition: background 0.2s ease;
 }
 
 .weekly-row:last-child {
   border-bottom: none;
 }
 
+.weekly-row:hover {
+  background: rgb(224 242 254 / 45%);
+  border-radius: 6px;
+}
+
 .weekly-day {
-  color: #607b92;
+  color: #526f89;
   font-size: 10px;
 }
 
@@ -122,21 +150,22 @@
 
 .weekly-min,
 .weekly-max {
-  color: #29435c;
+  color: #1e40af;
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
 .weekly-min {
-  color: #9aabba;
+  color: #8ba1b5;
 }
 
 .weekly-temperature-bar {
   width: 36px;
-  height: 4px;
+  height: 5px;
   overflow: hidden;
-  background: #e8f1f8;
+
+  background: #dbeafe;
   border-radius: 10px;
 }
 
@@ -144,7 +173,9 @@
   display: block;
   width: 75%;
   height: 100%;
-  background: linear-gradient(90deg, #91c9eb, #efc46e);
+
+  background: linear-gradient(90deg, #38bdf8 0%, #60a5fa 45%, #fbbf24 100%);
+
   border-radius: inherit;
 }
 
