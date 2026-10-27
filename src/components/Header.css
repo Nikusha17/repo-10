@@ -1,14 +1,15 @@
-app-header {
-  width: 100%;
-  min-height: 52px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 8px 16px;
 
-  background: linear-gradient(110deg, #fbfeff 0%, #e0f2fe 50%, #f5f3ff 100%);
+  .app-header {
+  width: 100%;
+  min-height: 52px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 8px 16px;
+
+  background: linear-gradient(110deg, #E0F7FA 0%, #7DD3FC 60%, #FDE68A 100%);
 
   border-bottom: 1px solid #bae6fd;
   font-family: "Noto Sans Georgian", sans-serif;
