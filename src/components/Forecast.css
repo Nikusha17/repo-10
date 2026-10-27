@@ -4,13 +4,7 @@
   padding: 15px;
   box-sizing: border-box;
 
- background: linear-gradient(
-  135deg, #DCEAF7 0%, #B8D5EF 55%, #93C5FD 100%
-);
-
-  border: 1px solid #dbeafe;
-  border-radius: 15px;
-  color: #0f2f50;
+ background: linear-gradient(145deg, #ffffff 0%, #f0f9ff 55%, #f5f3ff 100%);
 
   box-shadow: 0 4px 16px rgb(37 99 235 / 5%);
 }
@@ -31,7 +25,7 @@
 
 .forecast-heading p {
   margin: 0;
-  color: #7b93aa;
+  color: #f8fcff;
   font-size: 9px;
   line-height: 1.6;
 }
