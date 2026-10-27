@@ -4,7 +4,12 @@
   padding: 28px 24px;
   box-sizing: border-box;
 
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 55%, #f5f3ff 100%);
+  background: linear-gradient(
+  110deg,
+  #7DD3FC 0%,
+  #BBF7D0 55%,
+  #FDE68A 100%
+);
 
   border-top: 1px solid #bae6fd;
 }
