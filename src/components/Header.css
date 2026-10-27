@@ -1,12 +1,12 @@
-.app-header {
-  width: 100%;
-  min-height: 52px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 8px 16px;
+app-header {
+  width: 100%;
+  min-height: 52px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 8px 16px;
 
   background: linear-gradient(110deg, #fbfeff 0%, #e0f2fe 50%, #f5f3ff 100%);
 
