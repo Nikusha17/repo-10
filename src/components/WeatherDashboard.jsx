@@ -33,7 +33,7 @@ const CITIES = [
   { name: "წყალტუბო", value: "Tskaltubo" },
   { name: "მესტია", value: "Mestia" },
   { name: "გუდაური", value: "Gudauri" },
-  { name: "ხარაგაული", value: "Kharagauli" },
+  { name: "ხარაგაული", value: "Kharagauli" }
 ];
 
 function normalizeCity(value) {
@@ -42,7 +42,7 @@ function normalizeCity(value) {
   const match = CITIES.find(
     (item) =>
       item.name.toLocaleLowerCase("ka") === input ||
-      item.value.toLocaleLowerCase("en") === input,
+      item.value.toLocaleLowerCase("en") === input
   );
 
   return match ? match.value : value.trim();
@@ -66,7 +66,7 @@ function getWeatherTheme(current) {
   if (
     [
       1066, 1069, 1072, 1114, 1117, 1147, 1168, 1171, 1204, 1207, 1210, 1213,
-      1216, 1219, 1222, 1225, 1237, 1255, 1258, 1261, 1264,
+      1216, 1219, 1222, 1225, 1237, 1255, 1258, 1261, 1264
     ].includes(code)
   ) {
     return "snowy";
@@ -75,7 +75,7 @@ function getWeatherTheme(current) {
   if (
     [
       1063, 1150, 1153, 1180, 1183, 1186, 1189, 1192, 1195, 1198, 1201, 1240,
-      1243, 1246, 1249, 1252,
+      1243, 1246, 1249, 1252
     ].includes(code)
   ) {
     return "rainy";
@@ -98,7 +98,7 @@ function getWeatherTheme(current) {
 
 export default function WeatherDashboard({
   city: selectedCity = "Tbilisi",
-  unit: selectedUnit = "C",
+  unit: selectedUnit = "C"
 }) {
   const [city, setCity] = useState(selectedCity);
   const [unit, setUnit] = useState(selectedUnit);
@@ -133,7 +133,7 @@ export default function WeatherDashboard({
           setError(
             err instanceof Error
               ? err.message
-              : "ამინდის მონაცემების მიღება ვერ მოხერხდა.",
+              : "ამინდის მონაცემების მიღება ვერ მოხერხდა."
           );
         }
       } finally {
@@ -160,12 +160,12 @@ export default function WeatherDashboard({
     const normalizedCity = normalizeCity(searchCity);
 
     const foundCity = CITIES.find(
-      (item) => item.value.toLowerCase() === normalizedCity.toLowerCase(),
+      (item) => item.value.toLowerCase() === normalizedCity.toLowerCase()
     );
 
     if (!foundCity) {
       setError(
-        "ეს ქალაქი სიაში არ არის. აირჩიე საქართველოს მხარდაჭერილი ქალაქი.",
+        "ეს ქალაქი სიაში არ არის. აირჩიე საქართველოს მხარდაჭერილი ქალაქი."
       );
       return;
     }
@@ -212,7 +212,7 @@ export default function WeatherDashboard({
 
   const today =
     forecast.forecastday.find(
-      (day) => day.date === location.localtime.slice(0, 10),
+      (day) => day.date === location.localtime.slice(0, 10)
     ) ?? forecast.forecastday[0];
 
   const currentHour = Number(location.localtime.slice(11, 13));
@@ -277,7 +277,10 @@ export default function WeatherDashboard({
         <div className="current-weather-content">
           <div className="current-weather-location">{location.name}</div>
 
-          <div className="current-temperature">{temp(current.temp_c)}°</div>
+          <div className="current-temperature">
+            {temp(current.temp_c)}
+            {unit === "C" ? "°C" : "°F"}
+          </div>
 
           <h2>{current.condition.text}</h2>
 
@@ -323,7 +326,10 @@ export default function WeatherDashboard({
                 height="36"
               />
 
-              <span className="hourly-temp">{temp(hour.temp_c)}°</span>
+              <span className="hourly-temp">
+                {temp(hour.temp_c)}
+                {unit === "C" ? "°C" : "°F"}
+              </span>
             </div>
           ))}
         </div>
