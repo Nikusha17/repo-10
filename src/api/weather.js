@@ -1,4 +1,4 @@
-const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+const API_KEY = "d645a70618364010aef62342262110";
 const BASE_URL = "https://api.weatherapi.com/v1";
 
 const GEORGIAN_CITIES = {
